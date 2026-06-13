@@ -1,10 +1,10 @@
-# 🧠 CIFAR-10 Image Classification using Machine Learning
+#  CIFAR-10 Image Classification using Machine Learning
 
 This project implements an end-to-end machine learning pipeline for image classification using the CIFAR-10 dataset. It compares multiple classical ML models and evaluates their performance using standard metrics.
 
 ---
 
-## 🚀 Features
+## Features
 
 - Automatic CIFAR-10 dataset download and extraction
 - Data preprocessing pipeline:
@@ -26,7 +26,7 @@ This project implements an end-to-end machine learning pipeline for image classi
 
 ---
 
-## 📊 Dataset
+## Dataset
 
 - CIFAR-10 dataset
 - 10 classes:
@@ -34,7 +34,7 @@ This project implements an end-to-end machine learning pipeline for image classi
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - Python
 - NumPy
@@ -46,6 +46,39 @@ This project implements an end-to-end machine learning pipeline for image classi
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
+models/
+static/
+├── charts/
+└── data/
+train_models.py
+README.md
+
+
+---
+
+##  How to Run
+
+### 1. Install dependencies
+```bash
+pip install -r requirements.txt
+
+python train_models.py
+## Results
+Logistic Regression ~39% accuracy
+Random Forest ~38% accuracy
+SVM ~49% accuracy (best performance)
+
+Note: Results are based on PCA-reduced CIFAR-10 dataset using classical ML models.
+
+## Outputs Generated
+Trained models (.joblib)
+Confusion matrix plots
+Accuracy comparison charts
+CSV results file
+
+##Objective
+
+To demonstrate how classical machine learning algorithms perform on a complex image dataset and understand the importance of preprocessing and dimensionality reduction.
 
 
