@@ -11,6 +11,7 @@ import numpy as np
 from PIL import Image
 from flask import Flask, render_template, request, jsonify
 import joblib
+from flask import Flask
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
@@ -147,6 +148,6 @@ def about():
 
 # Auto-load models when imported (for production/gunicorn)
 load_models()
-
+app = Flask(__name__)
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=10000)
