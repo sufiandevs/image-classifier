@@ -56,7 +56,7 @@ def load_models():
     if os.path.exists("models/pca.joblib"):
         pca = joblib.load("models/pca.joblib")
     if len(models) == 0:
-    raise Exception("No models loaded. Check models folder.")
+        raise Exception("No models loaded. Check models folder.")
 
 
 def preprocess_uploaded_image(image_path):
