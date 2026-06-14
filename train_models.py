@@ -36,16 +36,17 @@ DATASET_DIR = "static/data/cifar-10-batches-py"
 
 
 def download_cifar10():
-    """Download and extract CIFAR-10 dataset."""
-    if not os.path.exists(DATASET_DIR):
-        print("Downloading CIFAR-10 dataset...")
-        urllib.request.urlretrieve(DATASET_URL, DATASET_FILE)
-        print("Extracting dataset...")
-        with tarfile.open(DATASET_FILE, 'r:gz') as tar:
-            tar.extractall("static/data")
-        print("Dataset ready.")
-    else:
-        print("Dataset already downloaded.")
+    return None
+    # """Download and extract CIFAR-10 dataset."""
+    # if not os.path.exists(DATASET_DIR):
+    #     print("Downloading CIFAR-10 dataset...")
+    #     urllib.request.urlretrieve(DATASET_URL, DATASET_FILE)
+    #     print("Extracting dataset...")
+    #     with tarfile.open(DATASET_FILE, 'r:gz') as tar:
+    #         tar.extractall("static/data")
+    #     print("Dataset ready.")
+    # else:
+    #     print("Dataset already downloaded.")
 
 
 def unpickle(file):
