@@ -68,9 +68,9 @@ def preprocess_uploaded_image(image_path):
     if scaler is None or pca is None:
         raise Exception("Scaler or PCA not loaded")
       
-   scaled = scaler.transform(flat)
-   reduced = pca.transform(scaled)
-   return reduced
+    scaled = scaler.transform(flat)
+    reduced = pca.transform(scaled)
+    return reduced
 
 
 @app.route('/')
