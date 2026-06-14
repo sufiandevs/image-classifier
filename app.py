@@ -31,18 +31,13 @@ pca = None
 
 
 def ensure_dataset():
-    """Download CIFAR-10 if not present."""
-    if not os.path.exists(DATASET_DIR):
-        os.makedirs('static/data', exist_ok=True)
-        # urllib.request.urlretrieve(DATASET_URL, DATASET_FILE)
-        with tarfile.open(DATASET_FILE, 'r:gz') as tar:
-            tar.extractall("static/data")
+       return
 
 
 def load_models():
     """Load trained models and preprocessing objects."""
     global models, scaler, pca
-    ensure_dataset()
+    # ensure_dataset()
     model_files = {
         "Logistic Regression": "models/logistic_regression.joblib",
         "Random Forest": "models/random_forest.joblib",
