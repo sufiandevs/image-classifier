@@ -11,7 +11,7 @@ import numpy as np
 from PIL import Image
 from flask import Flask, render_template, request, jsonify
 import joblib
-from flask import Flask
+
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
@@ -34,8 +34,7 @@ def ensure_dataset():
     """Download CIFAR-10 if not present."""
     if not os.path.exists(DATASET_DIR):
         os.makedirs('static/data', exist_ok=True)
-        urllib.request.urlretrieve(DATASET_URL, DATASET_FILE)
-        import tarfile
+        # urllib.request.urlretrieve(DATASET_URL, DATASET_FILE)
         with tarfile.open(DATASET_FILE, 'r:gz') as tar:
             tar.extractall("static/data")
 
@@ -56,6 +55,8 @@ def load_models():
         scaler = joblib.load("models/scaler.joblib")
     if os.path.exists("models/pca.joblib"):
         pca = joblib.load("models/pca.joblib")
+    if len(models) == 0:
+    raise Exception("No models loaded. Check models folder.")
 
 
 def preprocess_uploaded_image(image_path):
@@ -64,9 +65,12 @@ def preprocess_uploaded_image(image_path):
     img = img.resize((32, 32))
     img_array = np.array(img).astype('float32') / 255.0
     flat = img_array.reshape(1, -1)
-    scaled = scaler.transform(flat)
-    reduced = pca.transform(scaled)
-    return reduced
+    if scaler is None or pca is None:
+        raise Exception("Scaler or PCA not loaded")
+      
+   scaled = scaler.transform(flat)
+   reduced = pca.transform(scaled)
+   return reduced
 
 
 @app.route('/')
@@ -91,7 +95,10 @@ def upload():
         predictions = {}
         for name, model in models.items():
             pred_class = model.predict(features)[0]
-            proba = model.predict_proba(features)[0]
+            if hasattr(model, "predict_proba"):
+                  proba = model.predict_proba(features)[0]
+            else:
+                  proba = np.ones(len(CLASS_NAMES))
             predictions[name] = {
                 "class": CLASS_NAMES[pred_class],
                 "confidence": float(np.max(proba) * 100)
