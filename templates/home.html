@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Home - CIFAR-10 Classifier{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="glitch" data-text="Image Classification System">Image Classification System</h1>
+    <p class="subtitle">CIFAR-10 Dataset | Logistic Regression, Random Forest, SVM</p>
+    <div class="upload-card">
+      <div class="upload-area" id="dropZone">
+        <div class="upload-icon">📤</div>
+        <p>Drag & Drop an image here or click to browse</p>
+        <input type="file" id="imageInput" accept="image/*" hidden>
+        <button class="btn btn-primary" onclick="document.getElementById('imageInput').click()">Choose Image</button>
+      </div>
+      <div id="previewContainer" class="preview-container hidden">
+        <img id="previewImage" src="" alt="Preview">
+        <div id="resultBox" class="result-box hidden">
+          <h3>Prediction Result</h3>
+          <div class="final-result">
+            <span id="predictedClass">-</span>
+            <span id="confidence">-</span>
+          </div>
+          <div id="allModels" class="all-models"></div>
+        </div>
+      </div>
+      <div id="loading" class="loading hidden">
+        <div class="spinner"></div>
+        <p>Classifying image...</p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

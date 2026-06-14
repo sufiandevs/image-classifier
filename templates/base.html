@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}CIFAR-10 Image Classification{% endblock %}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="bg-animation"></div>
+  <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon">🎓</span>
+      <span>ML Project</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="{{ url_for('home') }}" class="{% if request.endpoint == 'home' %}active{% endif %}">Home</a></li>
+      <li><a href="{{ url_for('comparison') }}" class="{% if request.endpoint == 'comparison' %}active{% endif %}">Comparison</a></li>
+      <li><a href="{{ url_for('dataset') }}" class="{% if request.endpoint == 'dataset' %}active{% endif %}">Dataset</a></li>
+      <li><a href="{{ url_for('pipeline') }}" class="{% if request.endpoint == 'pipeline' %}active{% endif %}">ML Pipeline</a></li>
+      <li><a href="{{ url_for('sourcecode') }}" class="{% if request.endpoint == 'sourcecode' %}active{% endif %}">Source Code</a></li>
+      <li><a href="{{ url_for('about') }}" class="{% if request.endpoint == 'about' %}active{% endif %}">About</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
+  </nav>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+    <p>© 2025 CIFAR-10 Image Classification Project | Built with Flask & scikit-learn</p>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

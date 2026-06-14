@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}About - CIFAR-10 Project{% endblock %}
+{% block content %}
+<section class="page-section">
+  <h1 class="section-title">About This Project</h1>
+  <p class="section-desc">
+    This project was developed as part of a Machine Learning course. It demonstrates an end-to-end image classification system using traditional ML algorithms.
+  </p>
+
+  <div class="cards-grid">
+    <div class="info-card">
+      <h3>📚 Project Title</h3>
+      <p>Image Classification System using CIFAR-10 Dataset</p>
+    </div>
+    <div class="info-card">
+      <h3>🔬 Problem Statement</h3>
+      <p>Classify 32×32 color images into one of 10 categories: airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck.</p>
+    </div>
+    <div class="info-card">
+      <h3>💻 Language & Libraries</h3>
+      <p><strong>Language:</strong> Python</p>
+      <p><strong>Libraries:</strong> NumPy, Matplotlib, Pandas, scikit-learn, Flask</p>
+    </div>
+    <div class="info-card">
+      <h3>🧠 Models Used</h3>
+      <ul>
+        <li>Logistic Regression</li>
+        <li>Random Forest</li>
+        <li>Support Vector Machine (SVM)</li>
+      </ul>
+    </div>
+    <div class="info-card full-width">
+      <h3>📋 Student Guide</h3>
+      <p>This website includes all required sections for your course project:</p>
+      <ul>
+        <li><strong>Home:</strong> Upload any image and get a classification result.</li>
+        <li><strong>Comparison:</strong> Compare all three models with charts and analysis.</li>
+        <li><strong>Dataset:</strong> Dataset source and loading code.</li>
+        <li><strong>ML Pipeline:</strong> Step-by-step preprocessing, training, and evaluation.</li>
+        <li><strong>Source Code:</strong> Complete Python code ready for VS Code/Colab.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+{% endblock %}

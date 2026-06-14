@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Source Code - CIFAR-10 Project{% endblock %}
+{% block content %}
+<section class="page-section">
+  <h1 class="section-title">Complete Source Code</h1>
+  <p class="section-desc">
+    Below is the complete Python code for the CIFAR-10 Image Classification project. You can copy this code and run it in VS Code or Google Colab.
+  </p>
+
+  <div class="cards-grid">
+    <div class="info-card full-width">
+      <h3>📓 Full Project Code (train_models.py)</h3>
+      <pre class="code-block"><code>{{ source_code }}</code></pre>
+    </div>
+    <div class="info-card full-width">
+      <h3>🌐 Flask Web App Code (app.py)</h3>
+      <pre class="code-block"><code>{{ flask_code }}</code></pre>
+    </div>
+  </div>
+</section>
+{% endblock %}

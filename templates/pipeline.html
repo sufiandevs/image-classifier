@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block title %}ML Pipeline - CIFAR-10{% endblock %}
+{% block content %}
+<section class="page-section">
+  <h1 class="section-title">ML Pipeline Implementation</h1>
+  <p class="section-desc">
+    The complete machine learning pipeline from raw images to final predictions.
+  </p>
+
+  <div class="pipeline-steps">
+    <div class="step">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <h3>Data Collection</h3>
+        <p>Download CIFAR-10 dataset from the official source using urllib.</p>
+        <pre class="code-block small"><code>urllib.request.urlretrieve(DATASET_URL, "cifar-10-python.tar.gz")</code></pre>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <h3>Data Preprocessing</h3>
+        <p>Normalize pixel values, flatten images, and standardize features.</p>
+        <pre class="code-block small"><code>X = X.astype('float32') / 255.0
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)</code></pre>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <h3>Feature Engineering</h3>
+        <p>Apply PCA to reduce 3072 pixel features to 100 principal components.</p>
+        <pre class="code-block small"><code>pca = PCA(n_components=100)
+X_pca = pca.fit_transform(X_scaled)</code></pre>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-number">4</div>
+      <div class="step-content">
+        <h3>Model Training</h3>
+        <p>Train three models: Logistic Regression, Random Forest, and SVM.</p>
+        <pre class="code-block small"><code>models = {
+    "Logistic Regression": LogisticRegression(max_iter=500),
+    "Random Forest": RandomForestClassifier(n_estimators=30, max_depth=12),
+    "SVM": SVC(kernel='rbf', probability=True)
+}</code></pre>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-number">5</div>
+      <div class="step-content">
+        <h3>Model Evaluation</h3>
+        <p>Evaluate using Accuracy, Precision, Recall, F1-Score, and Confusion Matrix.</p>
+        <pre class="code-block small"><code>accuracy_score(y_test, y_pred)
+precision_score(y_test, y_pred, average='weighted')
+recall_score(y_test, y_pred, average='weighted')
+f1_score(y_test, y_pred, average='weighted')
+confusion_matrix(y_test, y_pred)</code></pre>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-number">6</div>
+      <div class="step-content">
+        <h3>Prediction</h3>
+        <p>Load the saved model and predict the class of a new uploaded image.</p>
+        <pre class="code-block small"><code>img = Image.open(image).resize((32, 32))
+features = pca.transform(scaler.transform(img.flatten() / 255.0))
+prediction = model.predict(features)</code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block title %}Model Comparison - CIFAR-10{% endblock %}
+{% block content %}
+<section class="page-section">
+  <h1 class="section-title">Model Comparison & Analysis</h1>
+  <p class="section-desc">
+    We trained three easy-to-explain machine learning models on CIFAR-10 and compared them using accuracy, precision, recall, and F1-score.
+  </p>
+
+  <div class="cards-grid">
+    <div class="info-card">
+      <h3>🏆 Best Model</h3>
+      <p><strong>Support Vector Machine (SVM)</strong> achieved the highest accuracy because it finds the best boundary between classes in the PCA-reduced feature space.</p>
+    </div>
+    <div class="info-card">
+      <h3>📊 Accuracy Bar Chart</h3>
+      <img src="{{ url_for('static', filename='charts/accuracy_comparison.png') }}" alt="Accuracy Comparison" class="chart-img">
+    </div>
+    <div class="info-card full-width">
+      <h3>🔍 Confusion Matrices</h3>
+      <img src="{{ url_for('static', filename='charts/confusion_matrices.png') }}" alt="Confusion Matrices" class="chart-img">
+    </div>
+    <div class="info-card full-width">
+      <h3>📋 Results Table</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Accuracy</th>
+              <th>Precision</th>
+              <th>Recall</th>
+              <th>F1-Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Logistic Regression</td>
+              <td>39.33%</td>
+              <td>38.86%</td>
+              <td>39.33%</td>
+              <td>38.95%</td>
+            </tr>
+            <tr>
+              <td>Random Forest</td>
+              <td>38.63%</td>
+              <td>38.03%</td>
+              <td>38.63%</td>
+              <td>37.88%</td>
+            </tr>
+            <tr class="best-row">
+              <td>Support Vector Machine</td>
+              <td>48.90%</td>
+              <td>48.72%</td>
+              <td>48.90%</td>
+              <td>48.62%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="info-card full-width">
+      <h3>🐍 Source Code for Model Comparison</h3>
+      <pre class="code-block"><code>from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+
+models = {
+    "Logistic Regression": LogisticRegression(max_iter=500),
+    "Random Forest": RandomForestClassifier(n_estimators=30, max_depth=12),
+    "Support Vector Machine": SVC(kernel='rbf', probability=True)
+}
+
+results = {}
+for name, model in models.items():
+    model.fit(X_train, y_train)
+    y_pred = model.predict(X_test)
+    results[name] = {
+        "accuracy": accuracy_score(y_test, y_pred),
+        "precision": precision_score(y_test, y_pred, average='weighted'),
+        "recall": recall_score(y_test, y_pred, average='weighted'),
+        "f1": f1_score(y_test, y_pred, average='weighted')
+    }</code></pre>
+    </div>
+  </div>
+</section>
+{% endblock %}

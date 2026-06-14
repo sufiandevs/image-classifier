@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}Dataset - CIFAR-10{% endblock %}
+{% block content %}
+<section class="page-section">
+  <h1 class="section-title">Dataset Used: CIFAR-10</h1>
+  <p class="section-desc">
+    CIFAR-10 is a popular benchmark dataset for image classification. It contains 60,000 tiny 32×32 color images across 10 classes.
+  </p>
+
+  <div class="cards-grid">
+    <div class="info-card">
+      <h3>🔗 Dataset Source</h3>
+      <p><strong>Original Source:</strong> Alex Krizhevsky, University of Toronto</p>
+      <p><strong>Download Link:</strong> <a href="https://www.cs.toronto.edu/~kriz/cifar.html" target="_blank">https://www.cs.toronto.edu/~kriz/cifar.html</a></p>
+      <p><strong>Kaggle Mirror:</strong> <a href="https://www.kaggle.com/datasets/pankrzysiu/cifar10-python" target="_blank">CIFAR-10 on Kaggle</a></p>
+    </div>
+    <div class="info-card">
+      <h3>📁 Dataset Details</h3>
+      <ul>
+        <li>Total Images: 60,000</li>
+        <li>Training Images: 50,000</li>
+        <li>Test Images: 10,000</li>
+        <li>Image Size: 32 × 32 pixels</li>
+        <li>Color Channels: 3 (RGB)</li>
+        <li>Number of Classes: 10</li>
+      </ul>
+    </div>
+    <div class="info-card full-width">
+      <h3>🐍 Source Code: Loading the Dataset</h3>
+      <pre class="code-block"><code>import os, pickle, urllib.request, tarfile
+import numpy as np
+
+DATASET_URL = "https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz"
+urllib.request.urlretrieve(DATASET_URL, "cifar-10-python.tar.gz")
+
+with tarfile.open("cifar-10-python.tar.gz", 'r:gz') as tar:
+    tar.extractall(".")
+
+def unpickle(file):
+    with open(file, 'rb') as fo:
+        return pickle.load(fo, encoding='bytes')
+
+train_images, train_labels = [], []
+for i in range(1, 6):
+    batch = unpickle(f'cifar-10-batches-py/data_batch_{i}')
+    train_images.append(batch[b'data'])
+    train_labels.extend(batch[b'labels'])
+
+train_images = np.vstack(train_images)
+train_labels = np.array(train_labels)
+
+test_batch = unpickle('cifar-10-batches-py/test_batch')
+test_images = test_batch[b'data']
+test_labels = np.array(test_batch[b'labels'])</code></pre>
+    </div>
+    <div class="info-card full-width">
+      <h3>🏷️ Class Labels</h3>
+      <div class="class-tags">
+        {% for name in ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck'] %}
+        <span class="class-tag">{{ name }}</span>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
